@@ -10,7 +10,6 @@ import './index.css'
 
 function App() {
   const navigate = useNavigate()
-  const [searchResults, setSearchResults] = useState()
   const [search, setSearch] = useState()
   const [posts, setPosts] = useState([{
     id: 1,
@@ -36,6 +35,7 @@ function App() {
     datetime: "July 01, 2021 11:17:36 AM",
     body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
   }])
+  const [searchResults, setSearchResults] = useState(posts)
   const [postTitle, setPostTitle] = useState()
   const [postBody, setPostBody] = useState()
   const handleSubmit = () => { }
@@ -45,15 +45,17 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout search={search} setSearch={setSearch} />}>
-          <Route index element={<Home posts={searchResults} />} />
+          <Route index element={<Home posts={posts} />} />
           <Route path='/post'>
-            <Route index element={<NewPosts
-              handleSubmit={handleSubmit}
-              postTitle={postTitle}
-              setPostTitle={setPostTitle}
-              postBody={postBody}
-              setPostBody={setPostBody}
-            />} />
+            <Route index element={
+              <NewPosts
+                handleSubmit={handleSubmit}
+                postTitle={postTitle}
+                setPostTitle={setPostTitle}
+                postBody={postBody}
+                setPostBody={setPostBody}
+              />}
+            />
             <Route path="/post/:id" element={
               <PostPage
                 posts={posts}
