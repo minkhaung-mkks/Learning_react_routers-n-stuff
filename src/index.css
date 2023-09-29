@@ -126,7 +126,7 @@ body {
   cursor: pointer;
 }
 
-.Home,
+.home,
 .NewPost,
 .PostPage,
 .About,
@@ -144,12 +144,12 @@ body {
   border-bottom: 1px solid lightgray;
 }
 
-.Home .post a {
+.home .post a {
   text-decoration: none;
 }
 
-.Home .post a,
-.Home .post a:visited {
+.home .post a,
+.home .post a:visited {
   color: #000;
 }
 
