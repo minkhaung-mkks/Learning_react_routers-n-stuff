@@ -6,7 +6,7 @@ import Layout from '../components/Layout'
 import Missing from '../components/Missing'
 import NewPosts from '../components/NewPosts'
 import PostPage from '../components/PostPage'
-import './App.css'
+import './index.css'
 
 function App() {
   const navigate = useNavigate()
@@ -44,7 +44,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Layout search={search} setSearch={setSearch} />}>
+        <Route path="/" element={<Layout search={search} setSearch={setSearch} />}>
           <Route index element={<Home posts={searchResults} />} />
           <Route path='/post'>
             <Route index element={<NewPosts
