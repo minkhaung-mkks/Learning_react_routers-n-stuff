@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-Post.propTypes = {
-    post: PropTypes.array
-}
+
 const Post = ({ post }) => {
     return (
         <article>
@@ -13,5 +11,7 @@ const Post = ({ post }) => {
         </article>
     )
 }
-
+Post.propTypes = {
+    post: PropTypes.array
+}
 export default Post

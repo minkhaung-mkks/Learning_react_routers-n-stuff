@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
-Nav.propTypes = {
-    search: PropTypes.string,
-    setSearch: PropTypes.func
-}
+
 const Nav = ({ search, setSearch }) => {
     return (
-        <nav className='nav'>
+        <nav className='Nav'>
             <form className='searchForm' onSubmit={(e) => e.preventDefault()}>
                 <label htmlFor="search">Search Posts</label>
                 <input
@@ -26,5 +23,8 @@ const Nav = ({ search, setSearch }) => {
         </nav>
     )
 }
-
+Nav.propTypes = {
+    search: PropTypes.string,
+    setSearch: PropTypes.func
+}
 export default Nav
