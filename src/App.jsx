@@ -39,7 +39,11 @@ function App() {
   const [postTitle, setPostTitle] = useState()
   const [postBody, setPostBody] = useState()
   const handleSubmit = () => { }
-  const handleDelete = () => { }
+  const handleDelete = (id) => {
+    const otherPosts = posts.filter(post => post.id !== id)
+    setPosts(otherPosts)
+    navigate.push('/')
+  }
 
   return (
     <>
