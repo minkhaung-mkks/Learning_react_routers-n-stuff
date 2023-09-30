@@ -1,11 +1,16 @@
 import { useState } from 'react'
 import { Route, useNavigate, Routes } from 'react-router-dom'
+import { format } from 'date-fns'
+
+// Components
 import About from '../components/About'
 import Home from '../components/Home'
 import Layout from '../components/Layout'
 import Missing from '../components/Missing'
 import NewPosts from '../components/NewPosts'
 import PostPage from '../components/PostPage'
+
+// CSS
 import './index.css'
 
 function App() {
@@ -41,7 +46,13 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault()
     const id = posts.length ? post[post.length - 1].id + 1 : 1
-    const dateTime
+    const dateTime = format(new Date(), 'MMMM dd, yyyy pp')
+    const newPost = { id, title: postTitle, body: postBody, dateTime }
+    const allPosts = [...posts, newPost];
+    setPosts(allPosts)
+    setPostTitle('')
+    setPostBody('')
+    navigate.push('/')
   }
   const handleDelete = (id) => {
     const otherPosts = posts.filter(post => post.id !== id)
