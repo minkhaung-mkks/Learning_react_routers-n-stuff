@@ -39,10 +39,10 @@ function App() {
     datetime: "July 01, 2021 11:17:36 AM",
     body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
   }])
-  const [search, setSearch] = useState()
-  const [searchResults, setSearchResults] = useState(posts)
-  const [postTitle, setPostTitle] = useState()
-  const [postBody, setPostBody] = useState()
+  const [search, setSearch] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+  const [postTitle, setPostTitle] = useState('')
+  const [postBody, setPostBody] = useState('')
   const handleSubmit = (e) => {
     e.preventDefault()
     const id = posts.length ? posts[posts.length - 1].id + 1 : 1
@@ -60,7 +60,10 @@ function App() {
     navigate.push('/')
   }
   useEffect(() => {
+    //     search.toLowerCase() will be an empty string, since the search term is empty.
+    // ''(empty string) is included in every string, so('some string').includes('') will return true.
     const filteredResults = posts.filter(post => ((post.title).toLowerCase()).includes(search.toLowerCase()) || ((post.body).toLowerCase()).includes(search.toLowerCase()))
+    console.log(filteredResults)
     setSearchResults(filteredResults.reverse())
   }, [posts, search])
   return (
