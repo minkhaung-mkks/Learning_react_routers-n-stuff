@@ -38,7 +38,11 @@ function App() {
   const [searchResults, setSearchResults] = useState(posts)
   const [postTitle, setPostTitle] = useState()
   const [postBody, setPostBody] = useState()
-  const handleSubmit = () => { }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const id = posts.length ? post[post.length - 1].id + 1 : 1
+    const dateTime
+  }
   const handleDelete = (id) => {
     const otherPosts = posts.filter(post => post.id !== id)
     setPosts(otherPosts)
