@@ -35,7 +35,7 @@ function App() {
       setPosts(allPosts)
       setPostTitle('')
       setPostBody('')
-      navigate.push('/')
+      navigate('/')
     } catch (err) {
       console.error(err)
       if (err?.response) {
@@ -56,7 +56,7 @@ function App() {
       setPosts(posts.map(post => post.id === id ? { ...res.data } : post))
       setEditTitle('')
       setEditBody('')
-      navigate.push('/')
+      navigate('/')
     } catch (err) {
       console.error(err)
       if (err?.response) {
@@ -74,7 +74,7 @@ function App() {
       await api.delete(`/posts/${id}`)
       const otherPosts = posts.filter(post => post.id !== id)
       setPosts(otherPosts)
-      navigate.push('/')
+      navigate('/')
     } catch (err) {
       console.error(err)
       if (err?.response) {
@@ -106,12 +106,11 @@ function App() {
       }
     }
     fetchPosts()
-  })
+  }, [])
   useEffect(() => {
     //     search.toLowerCase() will be an empty string, since the search term is empty.
     // ''(empty string) is included in every string, so('some string').includes('') will return true.
     const filteredResults = posts.filter(post => ((post.title).toLowerCase()).includes(search.toLowerCase()) || ((post.body).toLowerCase()).includes(search.toLowerCase()))
-    console.log(filteredResults)
     setSearchResults(filteredResults.reverse())
   }, [posts, search])
   return (
@@ -131,7 +130,7 @@ function App() {
                 setPostBody={setPostBody}
               />}
             />
-            <Route path="/edit/:id" element={
+            <Route path="/post/edit/:id" element={
               <EditPost
                 posts={posts}
                 handleEdit={handleEdit}
