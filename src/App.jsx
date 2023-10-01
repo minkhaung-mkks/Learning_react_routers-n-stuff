@@ -131,7 +131,7 @@ function App() {
                 setPostBody={setPostBody}
               />}
             />
-            <Route index element={
+            <Route path="/edit/:id" element={
               <EditPost
                 posts={posts}
                 handleEdit={handleEdit}
