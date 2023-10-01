@@ -13,6 +13,7 @@ import api from './api/posts'
 
 // CSS
 import './index.css'
+import EditPost from '../components/EditPost'
 
 function App() {
   const navigate = useNavigate()
@@ -117,7 +118,9 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout search={search} setSearch={setSearch} />}>
-          <Route index element={<Home posts={searchResults} />} />
+          <Route index element={
+            <Home posts={searchResults} />
+          } />
           <Route path='/post'>
             <Route index element={
               <NewPosts
@@ -126,6 +129,16 @@ function App() {
                 setPostTitle={setPostTitle}
                 postBody={postBody}
                 setPostBody={setPostBody}
+              />}
+            />
+            <Route index element={
+              <EditPost
+                posts={posts}
+                handleEdit={handleEdit}
+                editTitle={editTitle}
+                setEditTitle={setEditTitle}
+                editBody={editBody}
+                setEditBody={setEditBody}
               />}
             />
             <Route path="/post/:id" element={
