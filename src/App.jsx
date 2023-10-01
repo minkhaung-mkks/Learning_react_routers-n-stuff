@@ -21,6 +21,8 @@ function App() {
   const [searchResults, setSearchResults] = useState([])
   const [postTitle, setPostTitle] = useState('')
   const [postBody, setPostBody] = useState('')
+  const [editTitle, setEditTitle] = useState('')
+  const [editBody, setEditBody] = useState('')
   const handleSubmit = async (e) => {
     e.preventDefault()
     const id = posts.length ? posts[posts.length - 1].id + 1 : 1
@@ -44,7 +46,27 @@ function App() {
         console.error(err.message)
       }
     }
-
+  }
+  const handleEdit = async (id) => {
+    const dateTime = format(new Date(), 'MMMM dd, yyyy pp')
+    const updatePost = { id, title: editTitle, body: editBody, dateTime }
+    try {
+      const res = await api.put(`/posts/${id}`, updatePost)
+      setPosts(posts.map(post => post.id === id ? { ...res.data } : post))
+      setEditTitle('')
+      setEditBody('')
+      navigate.push('/')
+    } catch (err) {
+      console.error(err)
+      if (err?.response) {
+        console.error(err.response.data)
+        console.error(err.response.status)
+        console.error(err.response.headers)
+      }
+      else {
+        console.error(err.message)
+      }
+    }
   }
   const handleDelete = async (id) => {
     try {
