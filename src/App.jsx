@@ -9,6 +9,7 @@ import Layout from '../components/Layout'
 import Missing from '../components/Missing'
 import NewPosts from '../components/NewPosts'
 import PostPage from '../components/PostPage'
+import api from './api/posts'
 
 // CSS
 import './index.css'
@@ -36,6 +37,25 @@ function App() {
     setPosts(otherPosts)
     navigate.push('/')
   }
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await api.get('/posts')
+        if (res && res.data) setPosts(res.data)
+      } catch (err) {
+        console.error(err)
+        if (err?.response) {
+          console.error(err.response.data)
+          console.error(err.response.status)
+          console.error(err.response.headers)
+        }
+        else {
+          console.error(err.message)
+        }
+      }
+    }
+    fetchPosts()
+  })
   useEffect(() => {
     //     search.toLowerCase() will be an empty string, since the search term is empty.
     // ''(empty string) is included in every string, so('some string').includes('') will return true.
