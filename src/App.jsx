@@ -21,21 +21,49 @@ function App() {
   const [searchResults, setSearchResults] = useState([])
   const [postTitle, setPostTitle] = useState('')
   const [postBody, setPostBody] = useState('')
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const id = posts.length ? posts[posts.length - 1].id + 1 : 1
     const dateTime = format(new Date(), 'MMMM dd, yyyy pp')
     const newPost = { id, title: postTitle, body: postBody, dateTime }
-    const allPosts = [...posts, newPost];
-    setPosts(allPosts)
-    setPostTitle('')
-    setPostBody('')
-    navigate.push('/')
+    try {
+      const res = await api.post('/posts', newPost)
+      const allPosts = [...posts, res.data];
+      setPosts(allPosts)
+      setPostTitle('')
+      setPostBody('')
+      navigate.push('/')
+    } catch (err) {
+      console.error(err)
+      if (err?.response) {
+        console.error(err.response.data)
+        console.error(err.response.status)
+        console.error(err.response.headers)
+      }
+      else {
+        console.error(err.message)
+      }
+    }
+
   }
-  const handleDelete = (id) => {
-    const otherPosts = posts.filter(post => post.id !== id)
-    setPosts(otherPosts)
-    navigate.push('/')
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/posts/${id}`)
+      const otherPosts = posts.filter(post => post.id !== id)
+      setPosts(otherPosts)
+      navigate.push('/')
+    } catch (err) {
+      console.error(err)
+      if (err?.response) {
+        console.error(err.response.data)
+        console.error(err.response.status)
+        console.error(err.response.headers)
+      }
+      else {
+        console.error(err.message)
+      }
+    }
+
   }
   useEffect(() => {
     const fetchPosts = async () => {
