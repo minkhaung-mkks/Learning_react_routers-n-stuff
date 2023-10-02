@@ -10,6 +10,7 @@ import Missing from '../components/Missing'
 import NewPosts from '../components/NewPosts'
 import PostPage from '../components/PostPage'
 import api from './api/posts'
+import useAxiosFetch from './hooks/useAxiosFetch'
 
 // CSS
 import './index.css'
@@ -24,6 +25,9 @@ function App() {
   const [postBody, setPostBody] = useState('')
   const [editTitle, setEditTitle] = useState('')
   const [editBody, setEditBody] = useState('')
+
+  const { data, fetchError, loading } = useAxiosFetch('http://localhost:3500/posts')
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const id = posts.length ? posts[posts.length - 1].id + 1 : 1
@@ -86,27 +90,34 @@ function App() {
         console.error(err.message)
       }
     }
-
   }
+  // -----------------------------------------
+  // ## Old Fetch
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     try {
+  //       const res = await api.get('/posts')
+  //       if (res && res.data) setPosts(res.data)
+  //     } catch (err) {
+  //       console.error(err)
+  //       if (err?.response) {
+  //         console.error(err.response.data)
+  //         console.error(err.response.status)
+  //         console.error(err.response.headers)
+  //       }
+  //       else {
+  //         console.error(err.message)
+  //       }
+  //     }
+  //   }
+  //   fetchPosts()
+  // }, [])
+  // ------------------------------------------
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await api.get('/posts')
-        if (res && res.data) setPosts(res.data)
-      } catch (err) {
-        console.error(err)
-        if (err?.response) {
-          console.error(err.response.data)
-          console.error(err.response.status)
-          console.error(err.response.headers)
-        }
-        else {
-          console.error(err.message)
-        }
-      }
-    }
-    fetchPosts()
-  }, [])
+    setPosts(data)
+  }, [data])
+
   useEffect(() => {
     //     search.toLowerCase() will be an empty string, since the search term is empty.
     // ''(empty string) is included in every string, so('some string').includes('') will return true.
@@ -118,7 +129,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout search={search} setSearch={setSearch} />}>
           <Route index element={
-            <Home posts={searchResults} />
+            <Home
+              posts={searchResults}
+              fetchError={fetchError}
+              loading={loading}
+            />
           } />
           <Route path='/post'>
             <Route index element={
