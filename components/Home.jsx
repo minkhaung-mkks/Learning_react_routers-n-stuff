@@ -2,10 +2,12 @@
 import PropTypes from 'prop-types'
 import Feed from './Feed'
 
-const Home = ({ posts }) => {
+const Home = ({ posts, fetchError, loading }) => {
     return (
         <main className="home">
-            {posts?.length ? (
+            {loading && <p className='statusMsg'> Fetching Posts...</p>}
+            {fetchError && !loading && <p className='statusMsg' style={{ color: "red" }}>{fetchError}</p>}
+            {!loading && !fetchError && posts?.length ? (
                 <Feed posts={posts} />
             ) : (
                 <p style={{ marginTop: "2rem" }}>
@@ -17,6 +19,8 @@ const Home = ({ posts }) => {
     )
 }
 Home.propTypes = {
-    posts: PropTypes.array
+    posts: PropTypes.array,
+    fetchError: PropTypes.string,
+    loading: PropTypes.bool
 }
 export default Home
