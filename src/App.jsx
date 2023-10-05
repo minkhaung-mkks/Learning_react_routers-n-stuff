@@ -24,21 +24,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={
-              <Home
-                posts={searchResults}
-                fetchError={fetchError}
-                loading={loading}
-              />
+              <Home />
             } />
             <Route path='/post'>
               <Route index element={
-                <NewPosts
-                  handleSubmit={handleSubmit}
-                  postTitle={postTitle}
-                  setPostTitle={setPostTitle}
-                  postBody={postBody}
-                  setPostBody={setPostBody}
-                />}
+                <NewPosts />}
               />
               <Route path="/post/edit/:id" element={
                 <EditPost
