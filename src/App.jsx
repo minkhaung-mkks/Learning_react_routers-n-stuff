@@ -31,20 +31,10 @@ function App() {
                 <NewPosts />}
               />
               <Route path="/post/edit/:id" element={
-                <EditPost
-                  posts={posts}
-                  handleEdit={handleEdit}
-                  editTitle={editTitle}
-                  setEditTitle={setEditTitle}
-                  editBody={editBody}
-                  setEditBody={setEditBody}
-                />}
+                <EditPost />}
               />
               <Route path="/post/:id" element={
-                <PostPage
-                  posts={posts}
-                  handleDelete={handleDelete}
-                />
+                <PostPage />
               } />
             </Route>
             <Route path='about' element={<About />} />
