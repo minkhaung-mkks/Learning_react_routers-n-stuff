@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import PropTypes from 'prop-types'
-
-const EditPost = ({ posts, handleEdit, editTitle, setEditTitle, editBody, setEditBody }) => {
+import { useContext } from 'react'
+import DataContext from '../src/context/DataContext'
+const EditPost = () => {
+    const { posts, handleEdit, editTitle, setEditTitle, editBody, setEditBody } = useContext(DataContext)
     const { id } = useParams();
     const post = posts.find(post => (post.id).toString() === id)
 
@@ -38,13 +39,5 @@ const EditPost = ({ posts, handleEdit, editTitle, setEditTitle, editBody, setEdi
             }
         </main>
     )
-}
-EditPost.propTypes = {
-    posts: PropTypes.array,
-    editTitle: PropTypes.string,
-    editBody: PropTypes.string,
-    setEditTitle: PropTypes.func,
-    setEditBody: PropTypes.func,
-    handleEdit: PropTypes.func
 }
 export default EditPost
