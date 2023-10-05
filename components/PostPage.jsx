@@ -1,7 +1,9 @@
-import PropTypes from 'prop-types'
-import { Link, useParams } from "react-router-dom"
 
-const PostPage = ({ posts, handleDelete }) => {
+import { Link, useParams } from "react-router-dom"
+import { useContext } from 'react'
+import DataContext from '../src/context/DataContext'
+const PostPage = () => {
+    const { posts, handleDelete } = useContext(DataContext)
     const { id } = useParams();
     const post = posts.find(post => (post.id).toString() === id)
     return (
@@ -32,9 +34,5 @@ const PostPage = ({ posts, handleDelete }) => {
             </article>
         </main>
     )
-}
-PostPage.propTypes = {
-    posts: PropTypes.array,
-    handleDelete: PropTypes.func
 }
 export default PostPage
