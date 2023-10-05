@@ -9,6 +9,8 @@ import NewPosts from '../components/NewPosts'
 import PostPage from '../components/PostPage'
 import EditPost from '../components/EditPost'
 
+import { DataProvider } from './context/DataContext'
+
 // CSS
 import './index.css'
 
@@ -17,46 +19,49 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={
-            <Home
-              posts={searchResults}
-              fetchError={fetchError}
-              loading={loading}
-            />
-          } />
-          <Route path='/post'>
+      <DataProvider>
+
+        <Routes>
+          <Route path="/" element={<Layout />}>
             <Route index element={
-              <NewPosts
-                handleSubmit={handleSubmit}
-                postTitle={postTitle}
-                setPostTitle={setPostTitle}
-                postBody={postBody}
-                setPostBody={setPostBody}
-              />}
-            />
-            <Route path="/post/edit/:id" element={
-              <EditPost
-                posts={posts}
-                handleEdit={handleEdit}
-                editTitle={editTitle}
-                setEditTitle={setEditTitle}
-                editBody={editBody}
-                setEditBody={setEditBody}
-              />}
-            />
-            <Route path="/post/:id" element={
-              <PostPage
-                posts={posts}
-                handleDelete={handleDelete}
+              <Home
+                posts={searchResults}
+                fetchError={fetchError}
+                loading={loading}
               />
             } />
+            <Route path='/post'>
+              <Route index element={
+                <NewPosts
+                  handleSubmit={handleSubmit}
+                  postTitle={postTitle}
+                  setPostTitle={setPostTitle}
+                  postBody={postBody}
+                  setPostBody={setPostBody}
+                />}
+              />
+              <Route path="/post/edit/:id" element={
+                <EditPost
+                  posts={posts}
+                  handleEdit={handleEdit}
+                  editTitle={editTitle}
+                  setEditTitle={setEditTitle}
+                  editBody={editBody}
+                  setEditBody={setEditBody}
+                />}
+              />
+              <Route path="/post/:id" element={
+                <PostPage
+                  posts={posts}
+                  handleDelete={handleDelete}
+                />
+              } />
+            </Route>
+            <Route path='about' element={<About />} />
+            <Route path='*' element={<Missing />} />
           </Route>
-          <Route path='about' element={<About />} />
-          <Route path='*' element={<Missing />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </DataProvider>
     </>
   )
 }

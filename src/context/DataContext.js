@@ -116,7 +116,10 @@ export const DataProvider = ({ children }) => {
         setSearchResults(filteredResults.reverse())
     }, [posts, search])
     return (
-        <DataContext.Provider value={{}}>
+        <DataContext.Provider value={{
+            posts, searchResults, search, fetchError, data, loading, postTitle, postBody, editBody, editTitle,
+            handleDelete, handleEdit, handleSubmit
+        }}>
             {children}
         </DataContext.Provider>
     )
