@@ -1,5 +1,3 @@
-
-import PropTypes from 'prop-types'
 import Feed from './Feed'
 import { useContext } from 'react'
 import DataContext from '../src/context/DataContext'
@@ -19,10 +17,5 @@ const Home = () => {
             }
         </main >
     )
-}
-Home.propTypes = {
-    posts: PropTypes.array,
-    fetchError: PropTypes.string,
-    loading: PropTypes.bool
 }
 export default Home
