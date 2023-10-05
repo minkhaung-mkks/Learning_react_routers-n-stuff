@@ -12,9 +12,10 @@ const useAxiosFetch = (dataURL) => {
         const fetchData = async (url) => {
             setLoading(true)
             try {
-                const res = axios.get(url, {
+                const res = await axios.get(url, {
                     cancelToken: source.token
                 })
+                console.log(res)
                 if (isMounted) {
                     setData(res.data)
                     setFetchError(null)

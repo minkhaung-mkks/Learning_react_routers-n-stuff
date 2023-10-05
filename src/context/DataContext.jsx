@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 
-import api from './api/posts'
+import api from '../api/posts'
 
 const DataContext = createContext({})
 
@@ -106,6 +106,7 @@ export const DataProvider = ({ children }) => {
     // ------------------------------------------
 
     useEffect(() => {
+        console.log(data)
         setPosts(data)
     }, [data])
 
@@ -125,3 +126,6 @@ export const DataProvider = ({ children }) => {
         </DataContext.Provider>
     )
 }
+
+
+export default DataContext;
