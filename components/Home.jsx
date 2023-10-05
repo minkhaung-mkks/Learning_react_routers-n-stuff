@@ -1,8 +1,10 @@
 
 import PropTypes from 'prop-types'
 import Feed from './Feed'
-
-const Home = ({ posts, fetchError, loading }) => {
+import { useContext } from 'react'
+import DataContext from '../src/context/DataContext'
+const Home = () => {
+    const { posts, fetchError, loading } = useContext(DataContext)
     return (
         <main className="home">
             {loading && <p className='statusMsg'> Fetching Posts...</p>}
