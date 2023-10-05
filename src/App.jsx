@@ -15,8 +15,6 @@ import { DataProvider } from './context/DataContext'
 import './index.css'
 
 function App() {
-
-
   return (
     <>
       <DataProvider>
