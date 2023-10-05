@@ -1,6 +1,7 @@
-import PropTypes from 'prop-types'
-
-const NewPosts = ({ handleSubmit, postTitle, setPostTitle, postBody, setPostBody }) => {
+import { useContext } from 'react'
+import DataContext from '../src/context/DataContext'
+const NewPosts = () => {
+    const { handleSubmit, postTitle, setPostTitle, postBody, setPostBody } = useContext(DataContext)
     return (
         <main className="NewPost">
             <h2>New Post</h2>
@@ -13,12 +14,5 @@ const NewPosts = ({ handleSubmit, postTitle, setPostTitle, postBody, setPostBody
             </form>
         </main>
     )
-}
-NewPosts.propTypes = {
-    postTitle: PropTypes.string,
-    postBody: PropTypes.string,
-    setPostTitle: PropTypes.func,
-    setPostBody: PropTypes.func,
-    handleSubmit: PropTypes.func
 }
 export default NewPosts
