@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 
-import PropTypes from 'prop-types'
+import { useContext } from 'react'
+import DataContext from '../src/context/DataContext'
 
-const Nav = ({ search, setSearch }) => {
+const Nav = () => {
+    const { search, setSearch } = useContext(DataContext)
     return (
         <nav className='Nav'>
             <form className='searchForm' onSubmit={(e) => e.preventDefault()}>
@@ -22,9 +24,5 @@ const Nav = ({ search, setSearch }) => {
             </ul>
         </nav>
     )
-}
-Nav.propTypes = {
-    search: PropTypes.string,
-    setSearch: PropTypes.func
 }
 export default Nav
